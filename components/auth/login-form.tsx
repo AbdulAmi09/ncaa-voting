@@ -49,17 +49,10 @@ export function LoginForm() {
           description: 'You have been signed in',
         })
         
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', data.user.id)
-          .single()
-
-        if (profile?.role === 'admin' || profile?.role === 'superadmin') {
-          router.push('/admin/elections')
-        } else {
-          router.push('/dashboard/elections')
-        }
+        // Admin work now happens entirely in the NCAA Command Center
+        // (nigarbadminapp), not in this app -- every logged-in user lands
+        // on the voter-facing dashboard regardless of role.
+        router.push('/dashboard/elections')
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred'
